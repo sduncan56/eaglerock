@@ -45,17 +45,22 @@ namespace EagleRock.Controllers
         [HttpGet]
         public async Task<ActionResult<PayloadDto>> Get(string botId)
         {
-            var bytes = await _distributedCache.GetAsync(botId);
-            string json = Encoding.UTF8.GetString(bytes);
-            PayloadDto result = JsonConvert.DeserializeObject<PayloadDto>(json);
+            return await DataFunctions.DroneDataFunctions.GetData(botId, _distributedCache);
+        }
+
+        [Route("GetAll")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PayloadDto>>> GetAll()
+        {
+            List<PayloadDto> result = new List<PayloadDto>();
+
+            var keys = await DataFunctions.DroneDataFunctions.GetKeys(_distributedCache);
+            foreach (string key in keys)
+            {
+                result.Add(await DataFunctions.DroneDataFunctions.GetData(key, _distributedCache));
+            }
 
             return result;
         }
-
-        //[Route("GetAll")]
-        //public async Task<ActionResult<IEnumerable<PayloadDto>>> GetAll()
-        //{
-            
-        //}
     }
 }

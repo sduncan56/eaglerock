@@ -12,9 +12,9 @@ namespace EagleRock.Dtos
         public decimal Latitude { get; set; }
         public DateTime Timestamp { get; set; }
         public string Road { get; set; }
-        //public int TrafficDirection { get; set; }
-        //public float CarsPerMinute { get; set; }
-        //public 
+        public float TrafficDirection { get; set; } //in degrees?
+        public float CarsPerMinute { get; set; }
+        public float AverageSpeed { get; set; }
 
 
         public override bool Equals(object obj)
@@ -26,7 +26,10 @@ namespace EagleRock.Dtos
                 && Longitude == toCompare.Longitude
                 && Latitude == toCompare.Latitude
                 && Timestamp == toCompare.Timestamp
-                && Road == toCompare.Road;
+                && Road == toCompare.Road
+                && TrafficDirection == toCompare.TrafficDirection
+                && CarsPerMinute == toCompare.CarsPerMinute
+                && AverageSpeed == toCompare.AverageSpeed;
         }
     }
 }

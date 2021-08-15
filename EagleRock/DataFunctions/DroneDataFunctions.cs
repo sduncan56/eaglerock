@@ -1,4 +1,5 @@
-﻿using EagleRock.Utilities;
+﻿using EagleRock.Dtos;
+using EagleRock.Utilities;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System;
@@ -34,6 +35,13 @@ namespace EagleRock.DataFunctions
             var options = new DistributedCacheEntryOptions()
                  .SetAbsoluteExpiration(DateTime.Now.AddDays(10));
             await cache.SetAsync("keys", bytes, options);
+        }
+
+        public static async Task<PayloadDto> GetData(string botId, IDistributedCache cache)
+        {
+            var bytes = await cache.GetAsync(botId);
+            string json = Encoding.UTF8.GetString(bytes);
+            return JsonConvert.DeserializeObject<PayloadDto>(json);
         }
 
     }

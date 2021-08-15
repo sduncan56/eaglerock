@@ -1,5 +1,6 @@
 ﻿using EagleRock.Controllers;
 using EagleRock.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
@@ -28,7 +29,10 @@ namespace EagleRock.Test.Controllers
                 Longitude = 153.025131M,
                 Latitude = -27.469770M,
                 Timestamp = DateTime.MinValue,
-                Road = "Queen Street"
+                Road = "Queen Street",
+                TrafficDirection = 90,
+                AverageSpeed = 22,
+                CarsPerMinute = 10
             };
 
             botData2 = new PayloadDto()
@@ -37,7 +41,10 @@ namespace EagleRock.Test.Controllers
                 Longitude = 153.006653M,
                 Latitude = -27.640989M,
                 Timestamp = DateTime.MinValue,
-                Road = "Logan Motorway"
+                Road = "Logan Motorway",
+                TrafficDirection = 30,
+                AverageSpeed = 54,
+                CarsPerMinute = 60
             };
 
             var opts = Options.Create<MemoryDistributedCacheOptions>(new MemoryDistributedCacheOptions());
@@ -54,6 +61,23 @@ namespace EagleRock.Test.Controllers
             var savedData = await cache.GetAsync(botData1.BotId);
             PayloadDto result = JsonConvert.DeserializeObject<PayloadDto>(Encoding.UTF8.GetString(savedData));
             Assert.Equal(botData1, result);
+        }
+
+        [Fact]
+        public async void RetrieveDataFromAllBots()
+        {
+            TrafficController controller = new TrafficController(cache);
+            await controller.Create(botData1);
+            await controller.Create(botData2);
+
+            ActionResult<IEnumerable<PayloadDto>> result = await controller.GetAll();
+            var value = result.Value;
+
+            Assert.True(value.SingleOrDefault(x => x.BotId == botData1.BotId) != null);
+            Assert.True(value.SingleOrDefault(x => x.BotId == botData2.BotId) != null);
+            Assert.Equal(2, value.Count());
+
+
         }
 
     }
