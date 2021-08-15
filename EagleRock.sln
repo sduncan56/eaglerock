@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EagleRock", "EagleRock\EagleRock.csproj", "{A680AD7C-954B-45F2-A1A1-144D12161AB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EagleRock", "EagleRock\EagleRock.csproj", "{A680AD7C-954B-45F2-A1A1-144D12161AB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EagleRock.Test", "EagleRock.Test\EagleRock.Test.csproj", "{068DF607-5042-48F3-A0D1-D9DADDCD4471}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A680AD7C-954B-45F2-A1A1-144D12161AB1} = {A680AD7C-954B-45F2-A1A1-144D12161AB1}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{A680AD7C-954B-45F2-A1A1-144D12161AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A680AD7C-954B-45F2-A1A1-144D12161AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A680AD7C-954B-45F2-A1A1-144D12161AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068DF607-5042-48F3-A0D1-D9DADDCD4471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068DF607-5042-48F3-A0D1-D9DADDCD4471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068DF607-5042-48F3-A0D1-D9DADDCD4471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068DF607-5042-48F3-A0D1-D9DADDCD4471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

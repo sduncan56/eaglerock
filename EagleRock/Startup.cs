@@ -32,6 +32,9 @@ namespace EagleRock
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EagleRock", Version = "v1" });
             });
+
+
+            services.AddStackExchangeRedisCache(options => options.Configuration = "host.docker.internal:6379");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
